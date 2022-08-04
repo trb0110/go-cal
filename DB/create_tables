@@ -1,0 +1,55 @@
+
+-- ************************************** [role]
+CREATE TABLE [role]
+(
+ [role_id]   int IDENTITY (1, 1) NOT NULL ,
+ [role_type] nvarchar(50) NOT NULL ,
+
+
+ CONSTRAINT [PK_135] PRIMARY KEY CLUSTERED ([role_id] ASC)
+);
+GO
+-- ************************************** [user]
+CREATE TABLE [user]
+(
+ [user_id]  bigint IDENTITY (1, 1) NOT NULL ,
+ [username] nvarchar(50) NOT NULL ,
+ [role_id]  int NOT NULL ,
+ [password] nvarchar(150) NOT NULL ,
+ [calorie_limit] int DEFAULT 2100,
+
+
+ CONSTRAINT [PK_129] PRIMARY KEY CLUSTERED ([user_id] ASC),
+ CONSTRAINT [FK_143] FOREIGN KEY ([role_id])  REFERENCES [role]([role_id])
+);
+GO
+
+
+CREATE NONCLUSTERED INDEX [FK_145] ON [user]
+ (
+  [role_id] ASC
+ )
+
+GO
+-- ************************************** [calorie]
+CREATE TABLE [calorie]
+(
+ [calorie_id]    bigint IDENTITY (1, 1) NOT NULL ,
+ [user_id]       bigint NOT NULL ,
+ [calorie_stamp] datetime2(7) NOT NULL CONSTRAINT [DF_calorie_calorie_stamp] DEFAULT GETDATE() ,
+ [food]          nvarchar(150) NOT NULL ,
+ [calorie_count] int NOT NULL ,
+
+
+ CONSTRAINT [PK_148] PRIMARY KEY CLUSTERED ([calorie_id] ASC),
+ CONSTRAINT [FK_149] FOREIGN KEY ([user_id])  REFERENCES [user]([user_id])
+);
+GO
+
+
+CREATE NONCLUSTERED INDEX [FK_151] ON [calorie]
+ (
+  [user_id] ASC
+ )
+
+GO

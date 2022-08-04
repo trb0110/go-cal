@@ -1,0 +1,13 @@
+
+
+DROP TABLE [calorie];
+GO
+
+
+DROP TABLE [user];
+GO
+
+
+DROP TABLE [role];
+GO
+

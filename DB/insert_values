@@ -1,0 +1,17 @@
+  insert into [countcal].[dbo].[role] ([role_type])
+  values ('admin'),
+  ('user')
+
+  insert into [countcal].[dbo].[user] ([username],[role_id],[password])
+  values ('admin','1','admin'),
+  ('user1','2','user1'),
+  ('user2','2','user2'),
+  ('user3','2','user3'),
+  ('user4','2','user4'),
+  ('user5','2','user5')
+
+  insert into [countcal].[dbo].[calorie] ([user_id],[food],[calorie_count])
+  values (2,'apple',100),
+  (2,'chicken',250),
+  (3,'steak',300),
+  (4,'rice',50)
